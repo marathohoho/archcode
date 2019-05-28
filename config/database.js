@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 //Connect to the database using Sequelize:
-const connection = new Sequelize('archcode', 'root', '511605Dada', {
+const connection = new Sequelize('archcode', 'root', '', {
     host: 'localhost',
     dialect: 'mysql',
     define: {

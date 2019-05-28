@@ -71,7 +71,7 @@ const archBuilding = new GraphQLObjectType({
                     return building.state_id;
                 }
             },
-            objectPeiod: { 
+            objectPeriod: { 
                 type: GraphQLInt,
                 resolve(building, args){
                     return building.period_id;
@@ -144,6 +144,12 @@ const objectStatus = new GraphQLObjectType({
                 resolve(objectStatus, args){
                     return objectStatus.title
                 }
+            },
+            order : {
+                type: GraphQLInt,
+                resolve(objectStatus, args){
+                    return objectStatus.order
+                }
             }
         };
     }
@@ -165,32 +171,38 @@ const objectState = new GraphQLObjectType({
                 resolve(objectState, args){
                     return objectState.title
                 }
+            },
+            order : {
+                type: GraphQLInt,
+                resolve(objectState, args){
+                    return objectState.order
+                }
             }
         };
     }
 }); 
 
-const objectPeiod = new GraphQLObjectType({
-    name: 'objectPeiod',
+const objectPeriod = new GraphQLObjectType({
+    name: 'objectPeriod',
     description: 'This describes status of the building',
     fields: () => {
         return {
             id : {
                 type: GraphQLInt,
-                resolve(objectPeiod, args){
-                    return objectPeiod.id;
+                resolve(objectPeriod, args){
+                    return objectPeriod.id;
                 }
             },
             title : {
                 type: GraphQLString,
-                resolve(objectPeiod, args){
-                    return objectPeiod.title
+                resolve(objectPeriod, args){
+                    return objectPeriod.title
                 }
             },
             order: {
                 type: GraphQLInt,
-                resolve(objectPeiod, args){
-                    return objectPeiod.id;
+                resolve(objectPeriod, args){
+                    return objectPeriod.id;
                 }
             }
         };
@@ -218,7 +230,7 @@ const objectType = new GraphQLObjectType({
             order: {
                 type: GraphQLInt,
                 resolve(objectType, args){
-                    return objectPeiod.id;
+                    return objectType.id;
                 }
             }
         };
@@ -262,7 +274,7 @@ const query = new GraphQLObjectType({
                     objectState: {
                         type: GraphQLInt
                     },
-                    objectPeiod: {
+                    objectPeriod: {
                         type: GraphQLInt
                     },
                     objectType: {
@@ -290,6 +302,9 @@ const query = new GraphQLObjectType({
                     },
                     title : {
                         type: GraphQLString
+                    },
+                    order: {
+                        type: GraphQLInt
                     }
                 },
                 resolve(root, args){
@@ -314,7 +329,7 @@ const query = new GraphQLObjectType({
                 }     
             },
             objectState: {
-                type: new GraphQLList(archBuilding),
+                type: new GraphQLList(objectState),
                 args: {
                     id: {
                         type: GraphQLInt
@@ -330,8 +345,8 @@ const query = new GraphQLObjectType({
                     return db.models.object_state.findAll({where: args});
                 }
             },
-            objectPeiod: {
-                type: new GraphQLList(archBuilding),
+            objectPeriod: {
+                type: new GraphQLList(objectPeriod),
                 args: {
                     id: {
                         type: GraphQLInt
@@ -344,11 +359,11 @@ const query = new GraphQLObjectType({
                     }
                 },
                 resolve(root, args){
-                    return db.models.object_peiod.findAll({where: args});
+                    return db.models.object_period.findAll({where: args});
                 }
             },
             objectType: {
-                type: new GraphQLList(archBuilding),
+                type: new GraphQLList(objectType),
                 args: {
                     id: {
                         type: GraphQLInt
@@ -363,7 +378,7 @@ const query = new GraphQLObjectType({
                 resolve(root, args){
                     return db.models.object_type.findAll({where: args});
                 }
-            },
+            }
 
 
             //add more options here for accessing other characteristics

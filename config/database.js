@@ -80,6 +80,9 @@ const archStyle = connection.define('arch_style', {
     },
     title: {
         type: Sequelize.TEXT
+    },
+    order: {
+        type: Sequelize.INTEGER
     }
 });
 
@@ -109,7 +112,7 @@ const objectState = connection.define('object_state', {
     } 
 });
 
-const objectPeiod = connection.define('object_peiod', {
+const objectPeriod = connection.define('object_period', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -138,20 +141,20 @@ const objectType = connection.define('object_type', {
 
 // relationship between models:
 
-archBuilding.hasMany(archStyle);
-archStyle.belongsTo(archBuilding);
+// archBuilding.hasMany(archStyle);
+// archStyle.belongsTo(archBuilding);
 
-archBuilding.hasMany(objectStatus);
-objectStatus.belongsTo(archBuilding);
+// archBuilding.hasMany(objectStatus);
+// objectStatus.belongsTo(archBuilding);
 
-archBuilding.hasMany(objectState);
-objectState.belongsTo(archBuilding);
+// archBuilding.hasMany(objectState);
+// objectState.belongsTo(archBuilding);
 
-archBuilding.hasMany(objectPeiod);
-objectPeiod.belongsTo(archBuilding);
+// archBuilding.hasMany(objectPeiod);
+// objectPeiod.belongsTo(archBuilding);
 
-archBuilding.hasMany(objectType);
-objectType.belongsTo(archBuilding);
+// archBuilding.hasMany(objectType);
+// objectType.belongsTo(archBuilding);
 
 
 

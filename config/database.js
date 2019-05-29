@@ -25,7 +25,7 @@ const connection = new Sequelize('archcode', 'root', '511605Dada', {
 
 
 //in sequelize library (./node_modules/sequelize/lib/models.js) change the line 952 freezeTableName: from 
-// false to true to keep the names unchanged
+// false to true to keep the names unchangedasd
 
 // archBuilding connects directly to the mySQL database and 
 // retrives data from columns names of which are specified below
@@ -80,9 +80,6 @@ const archStyle = connection.define('arch_style', {
     },
     title: {
         type: Sequelize.TEXT
-    },
-    order: {
-        type: Sequelize.INTEGER
     }
 });
 
@@ -138,23 +135,6 @@ const objectType = connection.define('object_type', {
     }
 });
 
-
-// relationship between models:
-
-// archBuilding.hasMany(archStyle);
-// archStyle.belongsTo(archBuilding);
-
-// archBuilding.hasMany(objectStatus);
-// objectStatus.belongsTo(archBuilding);
-
-// archBuilding.hasMany(objectState);
-// objectState.belongsTo(archBuilding);
-
-// archBuilding.hasMany(objectPeiod);
-// objectPeiod.belongsTo(archBuilding);
-
-// archBuilding.hasMany(objectType);
-// objectType.belongsTo(archBuilding);
 
 
 

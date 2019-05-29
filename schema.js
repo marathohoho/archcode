@@ -117,11 +117,11 @@ const archStyle = new GraphQLObjectType({
                 resolve(arch_style, args){
                     return arch_style.title
                 }
-            },
+            },            
             arch_building: {
                 type: new GraphQLList(archBuilding),
-                resolve(arch_style){
-                    return arch_style.getarchBuilding();
+                resolve(arch_style, args){
+                    return arch_style.getarchBuilding({where : args});
                 }
             }
         };
@@ -247,45 +247,13 @@ const query = new GraphQLObjectType({
             archBuilding:{ // comes from the db
                 type: new GraphQLList(archBuilding),
                 args:{
-                    id: {
-                        type: GraphQLInt
-                    },
-                    title: {
-                        type: GraphQLString
-                    },
-                    archStyle: {
-                        type: GraphQLString
-                    },
-                    latitude: {
-                        type: GraphQLString
-                    },
-                    longitude: {
-                        type: GraphQLString
-                    },
-                    architect: {
-                        type: GraphQLString
-                    },
-                    description: {
-                        type: GraphQLString
-                    },
-                    objectStatus: {
-                        type: GraphQLInt
-                    },
-                    objectState: {
-                        type: GraphQLInt
-                    },
-                    objectPeriod: {
-                        type: GraphQLInt
-                    },
-                    objectType: {
-                        type: GraphQLInt
-                    },
-                    city: {
-                        type: GraphQLString
-                    },
-                    address: {
-                        type: GraphQLString
-                    }
+                    id: { type: GraphQLInt }, title: { type: GraphQLString }, 
+                    archStyle: { type: GraphQLString }, latitude: { type: GraphQLString },
+                    longitude: { type: GraphQLString }, architect: { type: GraphQLString },
+                    description: {type: GraphQLString }, objectStatus: { type: GraphQLInt },
+                    objectState: { type: GraphQLInt }, objectPeriod: { type: GraphQLInt },
+                    objectType: { type: GraphQLInt }, city: { type: GraphQLString },
+                    address: { type: GraphQLString }
                 },
                 resolve(root, args){
                     return db.models.arch_building.findAll({where: args});
@@ -296,85 +264,39 @@ const query = new GraphQLObjectType({
                         // to do with the db
 
                 type: new GraphQLList(archStyle),
-                args: { 
-                    id: {
-                        type: GraphQLInt
-                    },
-                    title : {
-                        type: GraphQLString
-                    },
-                    order: {
-                        type: GraphQLInt
-                    }
-                },
+                args: { id: { type: GraphQLInt }, title : { type: GraphQLString } },
                 resolve(root, args){
                     return db.models.arch_style.findAll({where: args}); // this name comes from the db
                 }                
             },
             objectStatus: {
                 type: new GraphQLList(objectStatus),
-                args: {
-                    id: {
-                        type: GraphQLInt
-                    },
-                    title: {
-                        type: GraphQLString
-                    },
-                    order: {
-                        type: GraphQLInt
-                    }
-                },
+                args: { id: { type: GraphQLInt }, title : { type: GraphQLString },
+                order: { type: GraphQLInt } },
                 resolve(root, args){
                     return db.models.object_status.findAll({where: args});
                 }     
             },
             objectState: {
                 type: new GraphQLList(objectState),
-                args: {
-                    id: {
-                        type: GraphQLInt
-                    },
-                    title: {
-                        type: GraphQLString
-                    },
-                    order: {
-                        type: GraphQLInt
-                    }
-                },
+                args: { id: { type: GraphQLInt }, title : { type: GraphQLString },
+                        order: { type: GraphQLInt } },
                 resolve(root, args){
                     return db.models.object_state.findAll({where: args});
                 }
             },
             objectPeriod: {
                 type: new GraphQLList(objectPeriod),
-                args: {
-                    id: {
-                        type: GraphQLInt
-                    },
-                    title: {
-                        type: GraphQLString
-                    },
-                    order: {
-                        type: GraphQLInt
-                    }
-                },
+                args: { id: { type: GraphQLInt }, title : { type: GraphQLString },
+                        order: { type: GraphQLInt } },
                 resolve(root, args){
                     return db.models.object_period.findAll({where: args});
                 }
             },
             objectType: {
                 type: new GraphQLList(objectType),
-                args: {
-                    id: {
-                        type: GraphQLInt
-                    },
-                    title: {
-                        type: GraphQLString
-                    },
-                    order: {
-                        type: GraphQLInt
-                    }
-                },
+                args: { id: { type: GraphQLInt }, title : { type: GraphQLString },
+                        order: { type: GraphQLInt } },
                 resolve(root, args){
                     return db.models.object_type.findAll({where: args});
                 }
